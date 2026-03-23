@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basti Smart Guide - Live News</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: #f0f2f5; }
+        
+        /* NAV BAR (Keep consistent with your other pages) */
+        .top-nav { background: #1a3a8a; color: #ffcc00; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .nav-links a { color: white; text-decoration: none; margin-left: 20px; text-transform: uppercase; font-size: 0.9rem; transition: 0.3s; }
+        .active-link { color: #ffcc00 !important; font-weight: bold; }
+
+        /* NEWS LAYOUT */
+        .news-header { background: #1a3a8a; color: white; padding: 60px 20px; text-align: center; border-bottom: 5px solid #FF9933; }
+        .container { max-width: 1100px; margin: -40px auto 50px; padding: 20px; }
+        
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        .news-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.1); transition: 0.3s; border-bottom: 4px solid #138808; }
+        .news-card:hover { transform: translateY(-8px); }
+        .news-img { width: 100%; height: 200px; object-fit: cover; background: #ddd; }
+        .news-content { padding: 20px; }
+        .news-tag { background: #FF9933; color: white; padding: 3px 10px; border-radius: 5px; font-size: 0.7rem; font-weight: bold; }
+        .news-title { font-size: 1.25rem; color: #1a3a8a; margin: 10px 0; line-height: 1.4; }
+        .news-desc { color: #555; font-size: 0.9rem; margin-bottom: 15px; }
+        .read-more { color: #138808; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+
+        footer { background: #1a3a8a; color: white; text-align: center; padding: 40px; margin-top: 50px; border-top: 5px solid #FF9933; }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div style="font-size: 1.2rem; letter-spacing: 1px;">BASTI SMART GUIDE</div>
+        <div class="nav-links">
+            <a href="main basti tour website.html">Home</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="officials.html">Officials</a>
+            <a href="news.html" class="active-link">News</a>
+        </div>
+    </nav>
+
+    <div class="news-header">
+        <h1 data-aos="zoom-in">Basti Live News Portal</h1>
+        <p data-aos="fade-up">Stay updated with the latest happenings in Basti Uttar Pradesh</p>
+    </div>
+
+    <div class="container">
+    <h2 style="color: #1a3a8a; margin-bottom: 20px;">Local Highlights</h2>
+    <div class="news-grid">
+        
+        <div class="news-card" data-aos="fade-up">
+            <div class="news-content">
+                <span class="news-tag" style="background: #138808;">LOCAL EVENT</span>
+                <h3 class="news-title">Preparation for Basti Mahotsav 2026</h3>
+                <p class="news-desc">The district administration has started meetings to plan the annual cultural festival at the GIC ground.</p>
+                <span class="read-more">Updated Today</span>
+            </div>
+        </div>
+
+        <div class="news-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="news-content">
+                <span class="news-tag">WEATHER ALERT</span>
+                <h3 class="news-title">Clear Skies Predicted for Basti</h3>
+                <p class="news-desc">Expect pleasant weather this week across Basti district. Perfect for visiting Chando Tal!</p>
+                <span class="read-more">Updated 2 hours ago</span>
+            </div>
+        </div>
+
+
+    <hr style="margin: 50px 0; border: 1px solid #ddd;">
+
+    <h2 style="color: #1a3a8a; margin-bottom: 20px;">State-wide Live Updates</h2>
+    <div id="news-container" class="news-grid">
+        <p style="text-align:center; width:100%;">Fetching live state updates...</p>
+    </div>
+</div>    </div>
+
+    <footer>
+        <p>© 2026 Basti Smart Guide | Real-Time News Feed</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        // REAL-TIME NEWS FETCHER
+        // Using a free RSS to JSON converter to get Google News for Basti
+        const newsContainer = document.getElementById('news-container');
+        const basticNewsUrl = 'https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=Basti+Uttar+Pradesh';
+
+        fetch(basticNewsUrl)
+            .then(response => response.json())
+            .then(data => {
+                newsContainer.innerHTML = ''; // Clear the "Fetching" message
+                
+                data.items.forEach((item, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'news-card';
+                    card.setAttribute('data-aos', 'fade-up');
+                    card.setAttribute('data-aos-delay', index * 100);
+
+                    // We use a fallback image if the news doesn't provide one
+                    const thumbnail = item.enclosure.link || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=500';
+
+                    card.innerHTML = `
+                        <img src="${thumbnail}" class="news-img" alt="News Image">
+                        <div class="news-content">
+                            <span class="news-tag">LIVE UPDATE</span>
+                            <h3 class="news-title">${item.title}</h3>
+                            <p class="news-desc">${item.description.substring(0, 100)}...</p>
+                            <a href="${item.link}" target="_blank" class="read-more">Read Full Story →</a>
+                        </div>
+                    `;
+                    newsContainer.appendChild(card);
+                });
+            })
+            .catch(err => {
+                newsContainer.innerHTML = '<p>Unable to load news right now. Please check back later!</p>';
+            });
+    </script>
+</body>
+</html>

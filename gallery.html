@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basti Gallery - UP-51</title>
+    <style>
+        /* 1. CORE STYLES */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* 2. NAVIGATION BAR (Matches Home Page) */
+        .top-nav {
+            background-color: #1a3a8a;
+            color: #ffcc00;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: #ffcc00; }
+
+        /* 3. GALLERY HEADER */
+        .gallery-header {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-bottom: 5px solid #ffcc00;
+        }
+
+        .gallery-header h1 { color: #1a3a8a; font-size: 2.8rem; margin: 0; }
+        .gallery-header p { font-size: 1.1rem; color: #666; margin-top: 10px; }
+
+        /* 4. THE GRID SYSTEM */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover { transform: translateY(-5px); }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+
+        /* Caption Overlay */
+        .caption {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover .caption { opacity: 1; }
+
+        /* 5. LIGHTBOX SYSTEM (The "Pop-up") */
+        .lightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* Show when targeted via URL #ID */
+        .lightbox:target { display: flex; }
+
+        .lightbox img {
+            max-width: 85%;
+            max-height: 75%;
+            border: 4px solid white;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+        }
+
+        .lightbox .info {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            max-width: 600px;
+            padding: 0 20px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 50px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover { color: #ffcc00; }
+
+        footer {
+            background: #1a3a8a;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 40px;
+            border-top: 5px solid #ffcc00;
+        }
+
+/* Update the Lightbox info text */
+    .lightbox .info h2 {
+            color: #ffcc00; /* Makes the title yellow like your theme */
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Added shadow for visibility */
+        }
+
+    .lightbox .info p {
+            color: #ffffff !important; /* Forces it to be pure white */
+            font-size: 1.2rem;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8); /* Shadow helps against light backgrounds */
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div style="font-size: 1.2rem; letter-spacing: 1px;">BASTI SMART GUIDE</div>
+        <div class="nav-links">
+            <a href="main basti tour website.html">Home</a>
+            <a href="gallery.html" style="color: #ffcc00;">Gallery</a>
+            <a href="officials.html" class="active-link">Officials</a>
+            <a href="news.html" class="active-link">News</a>
+        </div>
+    </nav>
+
+    <header class="gallery-header">
+        <h1>Basti Photo Gallery</h1>
+        <p>Explore the beauty and history of Basti, Uttar Pradesh</p>
+    </header>
+
+    <div class="gallery-container">
+        
+        <div class="gallery-item">
+            <a href="#img1">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/17/2d/a2/bhadeshwar-nath.jpg?w=1200&h=1200&s=1" alt="Bhadeshwar Nath">
+                <div class="caption">Bhadeshwar Nath Temple</div>
+            </a>
+        </div>
+
+        <div class="gallery-item">
+            <a href="#img2">
+                <img src="https://img1.wsimg.com/isteam/ip/47c0b8c4-258d-4e23-8e2f-efbedee46fc7/IMG_7034.jpeg/:/rs=w:1280/:/rs=w:1280" alt="Chhawani">
+                <div class="caption">Chhawani Martyrs Memorial</div>
+            </a>
+        </div>
+
+        <div class="gallery-item">
+            <a href="#img3">
+                <img src="https://cdn.s3waas.gov.in/s3b83aac23b9528732c23cc7352950e880/uploads/bfi_thumb/2018070389-olwbqw5bhaad81brpoirfmxik871eyj5jp0m2xektc.jpg" alt="Kateshwar Park">
+                <div class="caption">Kateshwar Park</div>
+            </a>
+        </div>
+
+        <div class="gallery-item">
+            <a href="#img4">
+                <img src="https://content.jdmagicbox.com/comp/basti/q8/9999p5542.5542.220322014307.l2q8/catalogue/amhat-bridge-basti-ho-basti-tourist-attraction-a1KFHZpnnr.jpg" alt="Amhat Bridge">
+                <div class="caption">Historic Amhat Bridge</div>
+            </a>
+        </div>
+    </div>
+
+    <div id="img1" class="lightbox">
+        <a href="#" class="close-btn">&times;</a>
+
+        <a href="#img4" class="prev-arrow prev">&#10094;</a> 
+        <a href="#img2" class="next-arrow next">&#10095;</a>
+
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/17/2d/a2/bhadeshwar-nath.jpg?w=1200&h=1200&s=1" alt="Temple">
+        <div class="info">
+            <h2>Bhadeshwar Nath Temple</h2>
+            <p>A famous Shiva temple on the banks of the Kuwano River, believed to have been established by Ravana.</p>
+        </div>
+    </div>
+
+    <div id="img2" class="lightbox">
+        <a href="#" class="close-btn">&times;</a>
+
+        <a href="#img1" class="prev-arrow prev">&#10094;</a> 
+    <a href="#img3" class="next-arrow next">&#10095;</a>
+
+        <img src="https://img1.wsimg.com/isteam/ip/47c0b8c4-258d-4e23-8e2f-efbedee46fc7/IMG_7034.jpeg/:/rs=w:1280/:/rs=w:1280" alt="Memorial">
+        <div class="info">
+            <h2>Chhawani Memorial</h2>
+            <p>The site where 250 freedom fighters were hanged during the 1857 revolution. A symbol of Basti's bravery.</p>
+        </div>
+    </div>
+
+    <div id="img3" class="lightbox">
+        <a href="#" class="close-btn">&times;</a>
+
+        <a href="#img2" class="prev-arrow prev">&#10094;</a> 
+    <a href="#img4" class="next-arrow next">&#10095;</a>
+
+        <img src="https://cdn.s3waas.gov.in/s3b83aac23b9528732c23cc7352950e880/uploads/bfi_thumb/2018070389-olwbqw5bhaad81brpoirfmxik871eyj5jp0m2xektc.jpg" alt="Park">
+        <div class="info">
+            <h2>Kateshwar Park</h2>
+            <p>Located in Gandhi Nagar, this is the most popular public park in Basti for families and kids.</p>
+        </div>
+    </div>
+
+    <div id="img4" class="lightbox">
+    <a href="#" class="close-btn">&times;</a>
+    <a href="#img3" class="prev-arrow prev">&#10094;</a> 
+    <a href="#img1" class="next-arrow next">&#10095;</a>
+    <img src="https://content.jdmagicbox.com/comp/basti/q8/9999p5542.5542.220322014307.l2q8/catalogue/amhat-bridge-basti-ho-basti-tourist-attraction-a1KFHZpnnr.jpg" alt="Amhat Bridge">
+    <div class="info">
+        <h2>Amhat Bridge</h2>
+        <p>A historic bridge over the Kuwano River that connects the city and offers a beautiful sunset view.</p>
+    </div>
+</div>
+
+    <footer>
+        <p>BASTI SMART GUIDE | © Made IN Basti Uttar Pradesh</p>
+    </footer>
+
+<script>
+    document.addEventListener('keydown', function(event) {
+        // Find the lightbox that is currently open (the one that is the "target")
+        const activeLightbox = document.querySelector('.lightbox:target');
+        
+        if (activeLightbox) {
+            if (event.key === "ArrowRight") {
+                // Find the 'next' arrow inside the active lightbox and click it
+                const nextBtn = activeLightbox.querySelector('.next');
+                if (nextBtn) nextBtn.click();
+            } 
+            else if (event.key === "ArrowLeft") {
+                // Find the 'prev' arrow inside the active lightbox and click it
+                const prevBtn = activeLightbox.querySelector('.prev');
+                if (prevBtn) prevBtn.click();
+            }
+            else if (event.key === "Escape") {
+                // Pressing 'Esc' will close the gallery
+                window.location.hash = "";
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
